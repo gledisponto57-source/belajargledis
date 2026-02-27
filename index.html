@@ -6,20 +6,19 @@
     <title>Tutor Gledis ✨</title>
     <style>
         body { background: #fff0f3; font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
-        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(255,133,162,0.2); }
+        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(255,133,162,0.2); max-width: 400px; margin: auto; }
         h2 { color: #ff85a2; margin-bottom: 20px; }
-        #display { background: #fff9fa; border: 1px solid #ffe0e9; padding: 15px; border-radius: 15px; min-height: 100px; margin-bottom: 20px; color: #444; line-height: 1.5; }
+        #display { background: #fff9fa; border: 1px solid #ffe0e9; padding: 15px; border-radius: 15px; min-height: 80px; margin-bottom: 20px; color: #444; display: flex; align-items: center; justify-content: center; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         button { background: #ff85a2; border: none; padding: 15px; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; }
         button:active { background: #ff4d7d; transform: scale(0.95); }
-        .spk { background: #ff4d7d; width: 100%; margin-top: 10px; padding: 10px; border-radius: 10px; border: none; color: white; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <h2>✨ Tutor Gledis ✨</h2>
-    <div id="display">Halo Gledis Cantik! 🌸<br>Pilih menu di bawah yuk buat belajar bareng aku!</div>
+    <div id="display">Halo Gledis! Pilih menu di bawah yuk 🌸</div>
     
     <div class="grid">
         <button onclick="pilih('kosakata')">📖 Kosakata</button>
@@ -27,32 +26,21 @@
         <button onclick="pilih('tips')">💡 Tips</button>
         <button onclick="pilih('kuis')">✏️ Kuis</button>
     </div>
-    
-    <button id="btnSuara" class="spk" onclick="bicara()">🔊 DENGAR SUARA</button>
 </div>
 
 <script>
-    let teksSekarang = "";
     const data = {
-        kosakata: ["Luminous (Bersinar) ✨\nContoh: The moon is luminous tonight.", "Ethereal (Indah & Anggun) ☁️\nContoh: Your voice is so ethereal.", "Serendipity (Keberuntungan) 🍀"],
-        motivasi: ["Jangan menyerah Gledis! Kamu hebat! 💪🌸", "Belajar hari ini untuk sukses besok! ✨", "Semangat terus belajarnya ya cantik! 🌟"],
-        tips: ["Belajar 25 menit, istirahat 5 menit ya! 🧠", "Catat pakai pulpen warna-warni biar seru! 🎨", "Jangan lupa minum air putih! 💧"],
-        kuis: ["Apa bahasa Inggrisnya 'Cantik'? \nJawab: Beautiful! 😍", "Apa lawan kata 'Big'? \nJawab: Small! ✨", "English-nya 'Matahari'? \nJawab: Sun! ☀️"]
+        kosakata: ["Luminous: Bersinar ✨", "Ethereal: Sangat Indah ☁️", "Serendipity: Keberuntungan 🍀"],
+        motivasi: ["Semangat Gledis! 💪", "Kamu pasti bisa! ✨", "Jangan menyerah! 🌟"],
+        tips: ["Belajar 25 menit saja biar gak pusing 🧠", "Minum air putih yang banyak 💧"],
+        kuis: ["Inggrisnya 'Cantik'? Jawab: Beautiful 😍", "Inggrisnya 'Pintar'? Jawab: Smart 🧠"]
     };
 
     function pilih(tipe) {
         const list = data[tipe];
-        teksSekarang = list[Math.floor(Math.random() * list.length)];
-        document.getElementById('display').innerText = teksSekarang;
-        document.getElementById('btnSuara').style.display = 'block';
-    }
-
-    function bicara() {
-        const u = new SpeechSynthesisUtterance(teksSekarang);
-        u.lang = 'en-US';
-        window.speechSynthesis.speak(u);
+        const teks = list[Math.floor(Math.random() * list.length)];
+        document.getElementById('display').innerText = teks;
     }
 </script>
-
 </body>
 </html>
