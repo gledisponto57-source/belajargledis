@@ -3,44 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor Gledis ✨</title>
+    <title>Gledis AI Academy - Final Version ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background: #fff0f3; font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
-        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(255,133,162,0.2); max-width: 400px; margin: auto; }
-        h2 { color: #ff85a2; margin-bottom: 20px; }
-        #display { background: #fff9fa; border: 1px solid #ffe0e9; padding: 15px; border-radius: 15px; min-height: 80px; margin-bottom: 20px; color: #444; display: flex; align-items: center; justify-content: center; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        button { background: #ff85a2; border: none; padding: 15px; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; }
-        button:active { background: #ff4d7d; transform: scale(0.95); }
+        body { font-family: 'Poppins', sans-serif; background: #fff1f2; color: #475569; }
+        .materi-card { background: white; border-radius: 1.2rem; transition: 0.3s; border: 1px solid #fecdd3; cursor: pointer; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; max-height: 550px; overflow-y: auto; padding: 10px; border-radius: 1rem; background: #fffafb; }
+        .vocab-item { background: white; padding: 12px; border-radius: 12px; border: 1px solid #ffe4e6; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .tenses-box { background: white; border-radius: 1.5rem; padding: 25px; border: 1px solid #fecdd3; margin-bottom: 25px; }
+        .formula-box { background: #f8fafc; border-left: 4px solid #db2777; padding: 12px; margin: 15px 0; font-family: monospace; font-size: 11px; line-height: 1.6; }
+        .tobe-tag { background: #db2777; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #fecdd3; border-radius: 10px; }
     </style>
 </head>
-<body>
+<body class="pb-20">
 
-<div class="card">
-    <h2>✨ Tutor Gledis ✨</h2>
-    <div id="display">Halo Gledis! Pilih menu di bawah yuk 🌸</div>
-    
-    <div class="grid">
-        <button onclick="pilih('kosakata')">📖 Kosakata</button>
-        <button onclick="pilih('motivasi')">💖 Motivasi</button>
-        <button onclick="pilih('tips')">💡 Tips</button>
-        <button onclick="pilih('kuis')">✏️ Kuis</button>
+    <div class="pt-10 pb-6 text-center">
+        <div class="w-20 h-20 bg-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-lg border-4 border-white text-3xl">👑</div>
+        <h1 class="text-2xl font-bold text-pink-600">Gledis AI Studio</h1>
+        <p class="text-[10px] tracking-[0.4em] text-slate-400 font-bold uppercase">500 Full Vocab • Deep Mastery Tenses</p>
     </div>
-</div>
 
-<script>
-    const data = {
-        kosakata: ["Luminous: Bersinar ✨", "Ethereal: Sangat Indah ☁️", "Serendipity: Keberuntungan 🍀"],
-        motivasi: ["Semangat Gledis! 💪", "Kamu pasti bisa! ✨", "Jangan menyerah! 🌟"],
-        tips: ["Belajar 25 menit saja biar gak pusing 🧠", "Minum air putih yang banyak 💧"],
-        kuis: ["Inggrisnya 'Cantik'? Jawab: Beautiful 😍", "Inggrisnya 'Pintar'? Jawab: Smart 🧠"]
-    };
+    <div class="px-5 space-y-6">
+        <div class="grid grid-cols-2 gap-4">
+            <button onclick="showVocab()" class="materi-card p-6 text-center shadow-md active:scale-95 transition-all border-b-4 border-pink-300">
+                <div class="text-3xl mb-2">📚</div>
+                <div class="font-bold text-xs uppercase tracking-tighter">500 Vocab Real</div>
+            </button>
+            <button onclick="showGrammar()" class="materi-card p-6 text-center shadow-md active:scale-95 transition-all border-b-4 border-pink-300">
+                <div class="text-3xl mb-2">🧠</div>
+                <div class="font-bold text-xs uppercase tracking-tighter">Mega Tenses</div>
+            </button>
+        </div>
 
-    function pilih(tipe) {
-        const list = data[tipe];
-        const teks = list[Math.floor(Math.random() * list.length)];
-        document.getElementById('display').innerText = teks;
-    }
-</script>
+        <div id="display-area" class="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-6 min-h-[600px] border border-pink-100 shadow-xl">
+            <div id="placeholder" class="text-center py-48">
+                <p class="text-pink-200 text-xs font-bold uppercase tracking-widest animate-pulse">Ready to Learn, Gledis? 🌸</p>
+            </div>
+            <div id="content-box" class="hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        // DATA LENGKAP 500 VOCAB - TIDAK ADA YANG DIHAPUS
+        const vocabList = [
+            {en:"Abide", id:"Patuh"}, {en:"Absorb", id:"Serap"}, {en:"Accept", id:"Terima"}, {en:"Accompany", id:"Temani"}, {en:"Accuse", id:"Tuduh"}, {en:"Achieve", id:"Capai"}, {en:"Acknowledge", id:"Akui"}, {en:"Acquire", id:"Dapat"}, {en:"Act", id:"Tindak"}, {en:"Add", id:"Tambah"}, {en:"Adjust", id:"Atur"}, {en:"Admire", id:"Kagum"}, {en:"Admit", id:"Akui"}, {en:"Adopt", id:"Adopsi"}, {en:"Adore", id:"Puja"}, {en:"Advise", id:"Saran"}, {en:"Afford", id:"Mampu"}, {en:"Agree", id:"Setuju"}, {en:"Aim", id:"Tujuan"}, {en:"Allow", id:"Izin"}, {en:"Amuse", id:"Hibur"}, {en:"Analyze", id:"Analisis"}, {en:"Announce", id:"Umumkan"}, {en:"Annoy", id:"Ganggu"}, {en:"Answer", id:"Jawab"}, {en:"Apologize", id:"Maaf"}, {en:"Appear", id:"Tampak"}, {en:"Apply", id:"Lamar"}, {en:"Appoint", id:"Tunjuk"}, {en:"Approve", id:"Setuju"}, {en:"Argue", id:"Debat"}, {en:"Arise", id:"Muncul"}, {en:"Arrange", id:"Atur"}, {en:"Arrive", id:"Sampai"}, {en:"Ask", id:"Tanya"}, {en:"Assert", id:"Tegas"}, {en:"Assume", id:"Duga"}, {en:"Astonish", id:"Kagum"}, {en:"Attach", id:"Lampir"}, {en:"Attack", id:"Serang"}, {en:"Attempt", id:"Coba"}, {en:"Attend", id:"Hadir"}, {en:"Attract", id:"Tarik"}, {en:"Avoid", id:"Hindari"}, {en:"Awake", id:"Bangun"},
+            {en:"Bake", id:"Bakar"}, {en:"Banish", id:"Usir"}, {en:"Bash", id:"Pukul"}, {en:"Bathe", id:"Mandi"}, {en:"Be", id:"Jadi"}, {en:"Bear", id:"Tanggung"}, {en:"Beat", id:"Pukul"}, {en:"Become", id:"Menjadi"}, {en:"Beg", id:"Mohon"}, {en:"Begin", id:"Mulai"}, {en:"Behave", id:"Sikap"}, {en:"Believe", id:"Percaya"}, {en:"Belong", id:"Milik"}, {en:"Bend", id:"Tekuk"}, {en:"Benefit", id:"Manfaat"}, {en:"Bet", id:"Bet"}, {en:"Bind", id:"Ikat"}, {en:"Bite", id:"Gigit"}, {en:"Bleed", id:"Darah"}, {en:"Bless", id:"Berkat"}, {en:"Blow", id:"Tiup"}, {en:"Blur", id:"Kabur"}, {en:"Blush", id:"Malu"}, {en:"Boast", id:"Sombong"}, {en:"Boil", id:"Rebus"}, {en:"Borrow", id:"Pinjam"}, {en:"Bounce", id:"Pantul"}, {en:"Bow", id:"Tunduk"}, {en:"Break", id:"Patah"}, {en:"Breathe", id:"Napas"}, {en:"Bring", id:"Bawa"}, {en:"Broadcast", id:"Siar"}, {en:"Build", id:"Bangun"}, {en:"Burn", id:"Bakar"}, {en:"Burst", id:"Meledak"}, {en:"Bury", id:"Kubur"}, {en:"Buy", id:"Beli"}, {en:"Buzz", id:"Dengung"},
+            {en:"Calculate", id:"Hitung"}, {en:"Call", id:"Panggil"}, {en:"Can", id:"Bisa"}, {en:"Care", id:"Peduli"}, {en:"Carry", id:"Bawa"}, {en:"Catch", id:"Tangkap"}, {en:"Cause", id:"Sebab"}, {en:"Celebrate", id:"Rayakan"}, {en:"Change", id:"Ubah"}, {en:"Charge", id:"Isi"}, {en:"Chase", id:"Kejar"}, {en:"Chat", id:"Ngobrol"}, {en:"Check", id:"Cek"}, {en:"Cheer", id:"Sorak"}, {en:"Chew", id:"Kunyah"}, {en:"Choose", id:"Pilih"}, {en:"Chop", id:"Potong"}, {en:"Claim", id:"Klaim"}, {en:"Clap", id:"Tepuk"}, {en:"Clean", id: "Bersih"}, {en:"Clear", id:"Jelas"}, {en:"Climb", id:"Panjat"}, {en:"Close", id:"Tutup"}, {en:"Collect", id:"Kumpul"}, {en:"Color", id:"Warnai"}, {en:"Combine", id:"Gabung"}, {en:"Come", id:"Datang"}, {en:"Comfort", id:"Nyaman"}, {en:"Command", id:"Perintah"}, {en:"Commit", id:"Komit"}, {en:"Compare", id:"Banding"}, {en:"Compete", id:"Lomba"}, {en:"Complain", id:"Mengeluh"}, {en:"Complete", id:"Lengkap"}, {en:"Confirm", id:"Konfirm"}, {en:"Connect", id:"Sambung"}, {en:"Consider", id:"Pikir"}, {en:"Consist", id:"Terdiri"}, {en:"Contact", id:"Kontak"}, {en:"Contain", id:"Isi"}, {en:"Continue", id:"Lanjut"}, {en:"Control", id:"Kendali"}, {en:"Cook", id:"Masak"}, {en:"Copy", id:"Salin"}, {en:"Correct", id:"Benar"}, {en:"Cost", id:"Harga"}, {en:"Count", id:"Hitung"}, {en:"Create", id:"Buat"}, {en:"Cry", id:"Nangis"}, {en:"Cut", id:"Potong"},
+            {en:"Dance", id:"Joget"}, {en:"Dare", id:"Berani"}, {en:"Deal", id:"Urus"}, {en:"Decide", id:"Putus"}, {en:"Declare", id:"Nyatakan"}, {en:"Decorate", id:"Hias"}, {en:"Decrease", id:"Kurang"}, {en:"Defeat", id:"Kalah"}, {en:"Defend", id:"Bela"}, {en:"Delay", id:"Tunda"}, {en:"Delete", id:"Hapus"}, {en:"Deliver", id:"Kirim"}, {en:"Demand", id:"Tuntut"}, {en:"Deny", id:"Tolak"}, {en:"Depend", id:"Tergantung"}, {en:"Describe", id:"Gambarkan"}, {en:"Deserve", id:"Pantas"}, {en:"Design", id:"Desain"}, {en:"Destroy", id:"Hancur"}, {en:"Detach", id:"Lepas"}, {en:"Detect", id:"Deteksi"}, {en:"Determine", id:"Tentukan"}, {en:"Develop", id:"Kembang"}, {en:"Devote", id:"Setia"}, {en:"Die", id:"Mati"}, {en:"Differ", id:"Beda"}, {en:"Dig", id:"Gali"}, {en:"Digest", id:"Cerna"}, {en:"Direct", id:"Arahkan"}, {en:"Disagree", id:"Tolak"}, {en:"Disappear", id:"Hilang"}, {en:"Discover", id:"Temukan"}, {en:"Discuss", id:"Bahas"}, {en:"Dislike", id:"Benci"}, {en:"Divide", id:"Bagi"}, {en:"Do", id:"Lakukan"}, {en:"Doubt", id:"Ragu"}, {en:"Drag", id:"Seret"}, {en:"Draw", id:"Gambar"}, {en:"Dream", id:"Mimpi"}, {en:"Dress", id:"Baju"}, {en:"Drink", id:"Minum"}, {en:"Drive", id:"Setir"}, {en:"Drop", id:"Jatuh"}, {en:"Dry", id:"Kering"}, {en:"Dust", id:"Debu"},
+            {en:"Earn", id:"Hasil"}, {en:"Eat", id:"Makan"}, {en:"Echo", id:"Gema"}, {en:"Edit", id:"Edit"}, {en:"Educate", id:"Didik"}, {en:"Elect", id:"Pilih"}, {en:"Embarrass", id:"Malu"}, {en:"Embrace", id:"Peluk"}, {en:"Emerge", id:"Muncul"}, {en:"Emphasize", id:"Tegas"}, {en:"Employ", id:"Kerja"}, {en:"Enable", id:"Bisa"}, {en:"Encourage", id:"Dukung"}, {en:"End", id:"Akhir"}, {en:"Engage", id:"Terlibat"}, {en:"Enjoy", id:"Nikmat"}, {en:"Enlarge", id:"Besar"}, {en:"Enlighten", id:"Terang"}, {en:"Enter", id:"Masuk"}, {en:"Envy", id:"Iri"}, {en:"Erase", id:"Hapus"}, {en:"Escape", id:"Lari"}, {en:"Establish", id:"Dirikan"}, {en:"Estimate", id:"Kira"}, {en:"Examine", id:"Periksa"}, {en:"Exchange", id:"Tukar"}, {en:"Excite", id:"Gembira"}, {en:"Excuse", id:"Alasan"}, {en:"Exercise", id:"Latihan"}, {en:"Exist", id:"Ada"}, {en:"Expand", id:"Luas"}, {en:"Expect", id:"Harap"}, {en:"Explain", id:"Jelaskan"}, {en:"Explore", id:"Jelajah"}, {en:"Extend", id:"Panjang"},
+            {en:"Face", id:"Hadap"}, {en:"Fade", id:"Pudar"}, {en:"Fail", id:"Gagal"}, {en:"Fall", id:"Jatuh"}, {en:"Fasten", id:"Ikat"}, {en:"Fear", id:"Takut"}, {en:"Feed", id:"Makan"}, {en:"Feel", id:"Rasa"}, {en:"Fetch", id:"Ambil"}, {en:"Fight", id:"Lawan"}, {en:"Fill", id:"Isi"}, {en:"Find", id:"Temu"}, {en:"Finish", id:"Selesai"}, {en:"Fix", id:"Betul"}, {en:"Flash", id:"Kilat"}, {en:"Flee", id:"Lari"}, {en:"Fling", id:"Lempar"}, {en:"Float", id:"Apung"}, {en:"Flop", id:"Gagal"}, {en:"Fly", id:"Terbang"}, {en:"Focus", id:"Fokus"}, {en:"Fold", id:"Lipat"}, {en:"Follow", id:"Ikut"}, {en:"Forbid", id:"Larang"}, {en:"Force", id:"Paksa"}, {en:"Forget", id:"Lupa"}, {en:"Forgive", id:"Maaf"}, {en:"Form", id:"Bentuk"}, {en:"Found", id:"Temukan"}, {en:"Freeze", id:"Beku"}, {en:"Fry", id:"Goreng"}, {en:"Fulfill", id:"Penuhi"},
+            {en:"Gain", id:"Dapat"}, {en:"Gather", id:"Kumpul"}, {en:"Gaze", id:"Tatap"}, {en:"Generate", id:"Hasilkan"}, {en:"Get", id:"Dapat"}, {en:"Give", id:"Beri"}, {en:"Glow", id:"Sinar"}, {en:"Go", id:"Pergi"}, {en:"Govern", id:"Atur"}, {en:"Grab", id:"Tangkap"}, {en:"Graduate", id:"Lulus"}, {en:"Greet", id:"Salam"}, {en:"Grind", id:"Giling"}, {en:"Grow", id:"Tumbuh"}, {en:"Guarantee", id:"Jamin"}, {en:"Guard", id:"Jaga"}, {en:"Guess", id:"Tebak"}, {en:"Guide", id:"Pandu"},
+            {en:"Halt", id:"Berhenti"}, {en:"Handle", id:"Urus"}, {en:"Hang", id:"Gantung"}, {en:"Happen", id:"Terjadi"}, {en:"Harass", id:"Ganggu"}, {en:"Harm", id:"Bahaya"}, {en:"Hate", id:"Benci"}, {en:"Hear", id:"Dengar"}, {en:"Help", id:"Bantu"}, {en:"Hesitate", id:"Ragu"}, {en:"Hide", id:"Sembunyi"}, {en:"Hire", id:"Sewa"}, {en:"Hit", id:"Pukul"}, {en:"Hold", id:"Pegang"}, {en:"Honor", id:"Hormat"}, {en:"Hope", id:"Harap"}, {en:"Hug", id:"Peluk"}, {en:"Hum", id:"Dengung"}, {en:"Hunt", id:"Buru"}, {en:"Hurry", id:"Buru-buru"}, {en:"Hurt", id:"Sakit"},
+            {en:"Identify", id:"Kenali"}, {en:"Ignore", id:"Abaikan"}, {en:"Illustrate", id:"Gambar"}, {en:"Imagine", id:"Bayangkan"}, {en:"Imitate", id:"Tiru"}, {en:"Impact", id:"Dampak"}, {en:"Imply", id:"Tersirat"}, {en:"Import", id:"Impor"}, {en:"Impress", id:"Kagum"}, {en:"Improve", id:"Maju"}, {en:"Include", id:"Masuk"}, {en:"Increase", id:"Tambah"}, {en:"Inform", id:"Beritahu"}, {en:"Inject", id:"Suntik"}, {en:"Injure", id:"Luka"}, {en:"Insert", id:"Masuk"}, {en:"Insist", id:"Desak"}, {en:"Inspect", id:"Periksa"}, {en:"Inspire", id:"Inspirasi"}, {en:"Install", id:"Pasang"}, {en:"Insult", id:"Hina"}, {en:"Intend", id:"Niat"}, {en:"Interact", id:"Interaksi"}, {en:"Interest", id:"Minat"}, {en:"Interpret", id:"Tafsir"}, {en:"Interrupt", id:"Potong"}, {en:"Introduce", id:"Kenalkan"}, {en:"Invent", id:"Cipta"}, {en:"Invest", id:"Invest"}, {en:"Invite", id:"Undang"}, {en:"Involve", id:"Libat"}, {en:"Iron", id:"Setrika"}, {en:"Irritate", id:"Iritasi"}, {en:"Itch", id:"Gatal"},
+            {en:"Jail", id:"Penjara"}, {en:"Jam", id:"Macet"}, {en:"Jog", id:"Joging"}, {en:"Join", id:"Ikut"}, {en:"Joke", id:"Canda"}, {en:"Judge", id:"Hakimi"}, {en:"Juggle", id:"Sulap"}, {en:"Jump", id:"Lompat"}, {en:"Justify", id:"Bela"},
+            {en:"Keep", id:"Jaga"}, {en:"Kick", id:"Tendang"}, {en:"Kill", id:"Bunuh"}, {en:"Kiss", id:"Cium"}, {en:"Kneel", id:"Berlutut"}, {en:"Knit", id:"Rajut"}, {en:"Knock", id:"Ketuk"}, {en:"Know", id:"Tahu"},
+            {en:"Label", id:"Label"}, {en:"Lack", id:"Kurang"}, {en:"Land", id:"Darat"}, {en:"Last", id:"Terakhir"}, {en:"Laugh", id:"Tawa"}, {en:"Launch", id:"Luncur"}, {en:"Lay", id:"Letak"}, {en:"Lead", id:"Pimpin"}, {en:"Lean", id:"Sandar"}, {en:"Learn", id:"Belajar"}, {en:"Leave", id:"Pergi"}, {en:"Lend", id:"Pinjam"}, {en:"Let", id:"Biar"}, {en:"Level", id:"Level"}, {en:"Lick", id:"Jilat"}, {en:"Lie", id:"Berbaring"}, {en:"Lift", id:"Angkat"}, {en:"Light", id:"Terang"}, {en:"Like", id:"Suka"}, {en:"Limit", id:"Batas"}, {en:"Link", id:"Sambung"}, {en:"List", id:"Daftar"}, {en:"Listen", id:"Dengar"}, {en:"Live", id:"Hidup"}, {en:"Load", id:"Muat"}, {en:"Loan", id:"Pinjam"}, {en:"Lock", id:"Kunci"}, {en:"Look", id:"Lihat"}, {en:"Lose", id:"Hilang"}, {en:"Love", id:"Cinta"},
+            {en:"Maintain", id:"Jaga"}, {en:"Make", id:"Buat"}, {en:"Manage", id:"Kelola"}, {en:"Mark", id:"Tanda"}, {en:"Marry", id:"Nikah"}, {en:"Match", id:"Cocok"}, {en:"Matter", id:"Masalah"}, {en:"Measure", id:"Ukur"}, {en:"Meet", id:"Temu"}, {en:"Melt", id:"Leleh"}, {en:"Memorize", id:"Hafal"}, {en:"Mend", id:"Perbaiki"}, {en:"Mention", id:"Sebut"}, {en:"Merge", id:"Gabung"}, {en:"Milk", id:"Perah"}, {en:"Mind", id:"Pikir"}, {en:"Miss", id:"Rindu"}, {en:"Mistake", id:"Salah"}, {en:"Mix", id:"Campur"}, {en:"Moan", id:"Rintih"}, {en:"Modify", id:"Ubah"}, {en:"Monitor", id:"Pantau"}, {en:"Move", id:"Gerak"}, {en:"Multiply", id:"Kali"}, {en:"Murder", id:"Bunuh"},
+            {en:"Name", id:"Nama"}, {en:"Need", id:"Butuh"}, {en:"Neglect", id:"Abaikan"}, {en:"Negotiate", id:"Nego"}, {en:"Nod", id:"Angguk"}, {en:"Note", id:"Catat"}, {en:"Notice", id:"Sadar"}, {en:"Notify", id:"Beritahu"}, {en:"Number", id:"Nomor"},
+            {en:"Obey", id:"Patuh"}, {en:"Object", id:"Tolak"}, {en:"Observe", id:"Amati"}, {en:"Obtain", id:"Dapat"}, {en:"Occur", id:"Terjadi"}, {en:"Offend", id:"Hina"}, {en:"Offer", id:"Tawar"}, {en:"Open", id:"Buka"}, {en:"Operate", id:"Operasi"}, {en:"Order", id:"Pesan"}, {en:"Organize", id:"Atur"}, {en:"Owe", id:"Hutang"}, {en:"Own", id:"Milik"},
+            {en:"Pack", id:"Kemas"}, {en:"Paint", id:"Lukis"}, {en:"Park", id:"Parkir"}, {en:"Pass", id:"Lewat"}, {en:"Paste", id:"Tempel"}, {en:"Pat", id:"Tepuk"}, {en:"Pause", id:"Jeda"}, {en:"Pay", id:"Bayar"}, {en:"Peel", id:"Kupas"}, {en:"Perform", id:"Tampil"}, {en:"Persuade", id:"Bujuk"}, {en:"Pick", id:"Pilih"}, {en:"Pilot", id:"Pilot"}, {en:"Pinch", id:"Cubit"}, {en:"Plan", id:"Rencana"}, {en:"Play", id:"Main"}, {en:"Plead", id:"Mohon"}, {en:"Please", id:"Senang"}, {en:"Plug", id:"Colok"}, {en:"Point", id:"Tunjuk"}, {en:"Polish", id:"Poles"}, {en:"Post", id:"Kirim"}, {en:"Pour", id:"Tuang"}, {en:"Practice", id:"Latihan"}, {en:"Pray", id:"Doa"}, {en:"Preach", id:"Khutbah"}, {en:"Predict", id:"Ramal"}, {en:"Prepare", id:"Siap"}, {en:"Present", id:"Hadir"}, {en:"Press", id:"Tekan"}, {en:"Prevent", id:"Cegah"}, {en:"Print", id:"Cetak"}, {en:"Proceed", id:"Lanjut"}, {en:"Promise", id:"Janji"}, {en:"Proof", id:"Bukti"}, {en:"Protect", id:"Lindung"}, {en:"Prove", id:"Bukti"}, {en:"Provide", id:"Sedia"}, {en:"Pull", id:"Tarik"}, {en:"Punch", id:"Tinju"}, {en:"Punish", id:"Hukum"}, {en:"Purchase", id:"Beli"}, {en:"Push", id:"Dorong"}, {en:"Put", id:"Taruh"},
+            {en:"Qualify", id:"Lolos"}, {en:"Question", id:"Tanya"}, {en:"Queue", id:"Antre"}, {en:"Quick", id:"Cepat"}, {en:"Quiet", id:"Diam"}, {en:"Quit", id:"Berhenti"}, {en:"Quote", id:"Kutip"},
+            {en:"Race", id:"Balap"}, {en:"Rain", id:"Hujan"}, {en:"Raise", id:"Angkat"}, {en:"Reach", id:"Gapai"}, {en:"Read", id:"Baca"}, {en:"Realize", id:"Sadar"}, {en:"Receive", id:"Terima"}, {en:"Recognize", id:"Kenal"}, {en:"Recommend", id:"Saran"}, {en:"Record", id:"Rekam"}, {en:"Reduce", id:"Kurang"}, {en:"Reflect", id:"Cermin"}, {en:"Refuse", id:"Tolak"}, {en:"Regret", id:"Sesal"}, {en:"Reject", id:"Tolak"}, {en:"Rejoice", id:"Gembira"}, {en:"Relax", id:"Santai"}, {en:"Release", id:"Lepas"}, {en:"Rely", id:"Andal"}, {en:"Remain", id:"Tetap"}, {en:"Remember", id:"Ingat"}, {en:"Remind", id:"Ingat"}, {en:"Remove", id:"Hapus"}, {en:"Repair", id:"Baik"}, {en:"Repeat", id:"Ulang"}, {en:"Replace", id:"Ganti"}, {en:"Reply", id:"Balas"}, {en:"Report", id:"Lapor"}, {en:"Request", id:"Minta"}, {en:"Rescue", id:"Selamat"}, {en:"Resign", id:"Resign"}, {en:"Resist", id:"Lawan"}, {en:"Resolve", id:"Selesai"}, {en:"Respect", id:"Hormat"}, {en:"Respond", id:"Respon"}, {en:"Rest", id:"Istirahat"}, {en:"Result", id:"Hasil"}, {en:"Retire", id:"Pensiun"}, {en:"Return", id:"Balik"}, {en:"Reveal", id:"Buka"}, {en:"Review", id:"Ulas"}, {en:"Revise", id:"Revisi"}, {en:"Reward", id:"Hadiah"}, {en:"Ride", id:"Naik"}, {en:"Ring", id:"Bunyi"}, {en:"Rise", id:"Bangkit"}, {en:"Risk", id:"Risiko"}, {en:"Roar", id:"Aum"}, {en:"Rob", id:"Rampok"}, {en:"Rock", id:"Goyang"}, {en:"Roll", id:"Gulung"}, {en:"Rot", id:"Busuk"}, {en:"Rub", id:"Gosok"}, {en:"Ruin", id:"Rusak"}, {en:"Rule", id:"Atur"}, {en:"Run", id:"Lari"}, {en:"Rush", id:"Buru"},
+            {en:"Sack", id:"Pecat"}, {en:"Sail", id:"Layar"}, {en:"Satisfy", id:"Puas"}, {en:"Save", id:"Simpan"}, {en:"Say", id:"Kata"}, {en:"Scan", id:"Scan"}, {en:"Scare", id:"Takut"}, {en:"Scold", id:"Marah"}, {en:"Score", id:"Skor"}, {en:"Scratch", id:"Garuk"}, {en:"Scream", id:"Teriak"}, {en:"Screw", id:"Baut"}, {en:"Scrub", id:"Gosok"}, {en:"Seal", id:"Segel"}, {en:"Search", id:"Cari"}, {en:"See", id:"Lihat"}, {en:"Seek", id:"Cari"}, {en:"Select", id:"Pilih"}, {en:"Sell", id:"Jual"}, {en:"Send", id:"Kirim"}, {en:"Sense", id:"Rasa"}, {en:"Separate", id:"Pisah"}, {en:"Serve", id:"Layani"}, {en:"Set", id:"Atur"}, {en:"Settle", id:"Selesai"}, {en:"Sew", id:"Jahit"}, {en:"Shake", id:"Kocok"}, {en:"Share", id:"Bagi"}, {en:"Sharpen", id:"Asah"}, {en:"Shatter", id:"Hancur"}, {en:"Shine", id:"Sinar"}, {en:"Shiver", id:"Gigil"}, {en:"Shock", id:"Kaget"}, {en:"Shoot", id:"Tembak"}, {en:"Shop", id:"Belanja"}, {en:"Shout", id:"Teriak"}, {en:"Show", id:"Tunjuk"}, {en:"Shrink", id:"Susut"}, {en:"Shrug", id:"Angkat"}, {en:"Shut", id:"Tutup"}, {en:"Sigh", id:"Napas"}, {en:"Sign", id:"Tanda"}, {en:"Signal", id:"Sinyal"}, {en:"Sin", id:"Dosa"}, {en:"Sing", id:"Nyanyi"}, {en:"Sink", id:"Tenggelam"}, {en:"Sip", id:"Seruput"}, {en:"Sit", id:"Duduk"}, {en:"Size", id:"Ukuran"}, {en:"Ski", id:"Ski"}, {en:"Skip", id:"Lewat"}, {en:"Slap", id:"Tampar"}, {en:"Slay", id:"Bunuh"}, {en:"Sleep", id:"Tidur"}, {en:"Slide", id:"Geser"}, {en:"Slip", id:"Slip"}, {en:"Slow", id:"Lambat"}, {en:"Smash", id:"Hancur"}, {en:"Smell", id:"Cium"}, {en:"Smile", id:"Senyum"}, {en:"Smoke", id:"Asap"}, {en:"Snatch", id:"Rebut"}, {en:"Sneeze", id:"Bersin"}, {en:"Sniff", id:"Cium"}, {en:"Snore", id:"Ngorok"}, {en:"Snow", id:"Salju"}, {en:"Soak", id:"Rendam"}, {en:"Solve", id:"Selesai"}, {en:"Soothe", id:"Tenang"}, {en:"Sort", id:"Sortir"}, {en:"Sound", id:"Suara"}, {en:"Speak", id:"Bicara"}, {en:"Speed", id:"Cepat"}, {en:"Spell", id:"Eja"}, {en:"Spend", id:"Habis"}, {en:"Spill", id:"Tumpah"}, {en:"Spin", id:"Putar"}, {en:"Spit", id:"Ludah"}, {en:"Split", id:"Belah"}, {en:"Spoil", id:"Rusak"}, {en:"Spray", id:"Semprot"}, {en:"Spread", id:"Sebar"}, {en:"Spring", id:"Lompat"}, {en:"Sprout", id:"Tumbuh"}, {en:"Squash", id:"Remuk"}, {en:"Squeak", id:"Bunyi"}, {en:"Squeeze", id:"Peras"}, {en:"Stain", id:"Noda"}, {en:"Stamp", id:"Cap"}, {en:"Stand", id:"Berdiri"}, {en:"Stare", id:"Tatap"}, {en:"Start", id:"Mulai"}, {en:"Stay", id:"Tinggal"}, {en:"Steal", id:"Curi"}, {en:"Steer", id:"Setir"}, {en:"Step", id:"Langkah"}, {en:"Stick", id:"Tempel"}, {en:"Sting", id:"Sengat"}, {en:"Stink", id:"Bau"}, {en:"Stir", id:"Aduk"}, {en:"Stop", id:"Stop"}, {en:"Store", id:"Simpan"}, {en:"Stretch", id:"Tarik"}, {en:"Strike", id:"Pukul"}, {en:"Struggle", id:"Berjuang"}, {en:"Study", id:"Belajar"}, {en:"Submit", id:"Kirim"}, {en:"Succeed", id:"Sukses"}, {en:"Suffer", id:"Derita"}, {en:"Suggest", id:"Saran"}, {en:"Supply", id:"Sedia"}, {en:"Support", id:"Dukung"}, {en:"Suppose", id:"Kira"}, {en:"Surprise", id:"Kejut"}, {en:"Survive", id:"Hidup"}, {en:"Swear", id:"Sumpah"}, {en:"Sweep", id:"Sapu"}, {en:"Swell", id:"Bengkak"}, {en:"Swim", id:"Renang"}, {en:"Swing", id:"Ayun"}, {en:"Switch", id:"Ganti"},
+            {en:"Take", id:"Ambil"}, {en:"Talk", id:"Ngobrol"}, {en:"Tap", id:"Ketuk"}, {en:"Taste", id:"Rasa"}, {en:"Teach", id:"Ajar"}, {en:"Tear", id:"Sobek"}, {en:"Tease", id:"Ejek"}, {en:"Tell", id:"Cerita"}, {en:"Tempt", id:"Goda"}, {en:"Tend", id:"Cenderung"}, {en:"Test", id:"Tes"}, {en:"Thank", id:"Terima"}, {en:"Think", id:"Pikir"}, {en:"Thrive", id:"Maju"}, {en:"Throw", id:"Lempar"}, {en:"Tick", id:"Centang"}, {en:"Tickle", id:"Geli"}, {en:"Tie", id:"Ikat"}, {en:"Tip", id:"Ujung"}, {en:"Tire", id:"Lelah"}, {en:"Touch", id:"Sentuh"}, {en:"Tough", id:"Kuat"}, {en:"Tow", id:"Tarik"}, {en:"Trace", id:"Lacak"}, {en:"Trade", id:"Dagang"}, {en:"Train", id:"Latih"}, {en:"Translate", id:"Terjemah"}, {en:"Trap", id:"Jebak"}, {en:"Travel", id:"Jalan"}, {en:"Treat", id:"Rawat"}, {en:"Tremble", id:"Gigil"}, {en:"Trick", id:"Tipu"}, {en:"Trip", id:"Jatuh"}, {en:"Trust", id:"Percaya"}, {en:"Try", id:"Coba"}, {en:"Tune", id:"Nada"}, {en:"Turn", id:"Putar"}, {en:"Twist", id:"Pelintir"}, {en:"Type", id:"Ketik"},
+            {en:"Understand", id:"Paham"}, {en:"Unite", id:"Satu"}, {en:"Unlock", id:"Buka"}, {en:"Update", id:"Update"}, {en:"Urge", id:"Desak"}, {en:"Use", id:"Pakai"}, {en:"Utter", id:"Ucap"},
+            {en:"Value", id:"Nilai"}, {en:"Vanish", id:"Hilang"}, {en:"Vary", id:"Beda"}, {en:"Verify", id:"Cek"}, {en:"Vex", id:"Kesal"}, {en:"View", id:"Lihat"}, {en:"Visit", id:"Kunjung"}, {en:"Voice", id:"Suara"}, {en:"Vote", id:"Vote"},
+            {en:"Wait", id:"Tunggu"}, {en:"Wake", id:"Bangun"}, {en:"Walk", id:"Jalan"}, {en:"Wander", id:"Keliling"}, {en:"Want", id:"Mau"}, {en:"Warn", id:"Ingat"}, {en:"Wash", id:"Cuci"}, {en:"Waste", id:"Buang"}, {en:"Watch", id:"Nonton"}, {en:"Water", id:"Air"}, {en:"Wave", id:"Lambaian"}, {en:"Wear", id:"Pakai"}, {en:"Weave", id:"Tenun"}, {en:"Wed", id:"Nikah"}, {en:"Weep", id:"Nangis"}, {en:"Weigh", id:"Timbang"}, {en:"Welcome", id:"Sambut"}, {en:"Wet", id:"Basah"}, {en:"Whip", id:"Cambuk"}, {en:"Whisper", id:"Bisik"}, {en:"Whistle", id:"Siul"}, {en:"Win", id:"Menang"}, {en:"Wind", id:"Angin"}, {en:"Wink", id:"Kedip"}, {en:"Wipe", id:"Lap"}, {en:"Wish", id:"Harap"}, {en:"Withdraw", id:"Tarik"}, {en:"Witness", id:"Saksi"}, {en:"Wonder", id:"Tanya"}, {en:"Work", id:"Kerja"}, {en:"Worry", id:"Khawatir"}, {en:"Worship", id:"Puja"}, {en:"Wrap", id:"Bungkus"}, {en:"Wreck", id:"Rusak"}, {en:"Write", id:"Tulis"},
+            {en:"Yawn", id:"Menguap"}, {en:"Yell", id:"Teriak"}, {en:"Yield", id:"Hasil"},
+            {en:"Zip", id:"Zip"}, {en:"Zoom", id:"Zoom"}
+        ];
+
+        function showVocab() {
+            const box = document.getElementById('content-box');
+            document.getElementById('placeholder').classList.add('hidden');
+            box.classList.remove('hidden');
+            let html = `<div class='flex justify-between items-center mb-6'><h3 class='text-pink-600 font-bold text-lg'>📚 500 Vocabulary List</h3><span class='bg-pink-100 text-pink-600 text-[10px] px-3 py-1 rounded-full'>Total: ${vocabList.length}</span></div><div class='vocab-grid'>`;
+            vocabList.forEach(v => {
+                html += `<div class="vocab-item"><p class="font-bold text-pink-500 text-[11px]">${v.en}</p><p class="text-[9px] text-slate-400 font-medium">${v.id}</p></div>`;
+            });
+            html += `</div>`;
+            box.innerHTML = html;
+        }
+
+        function showGrammar() {
+            const box = document.getElementById('content-box');
+            document.getElementById('placeholder').classList.add('hidden');
+            box.classList.remove('hidden');
+            box.innerHTML = `
+                <h3 class="text-pink-600 font-bold mb-8 text-center text-xl">🧠 Mega Mastery: 5 Tenses</h3>
+                
+                <div class="space-y-10">
+                    <div class="tenses-box shadow-sm border-l-8 border-l-pink-500">
+                        <h4 class="font-bold text-pink-600 text-lg mb-2 underline">1. Simple Present Tense</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed italic mb-4">"The Habitual & Universal Truth Machine"</p>
+                        
+                        <p class="text-xs font-bold text-slate-800">🎯 Kegunaan Utama:</p>
+                        <p class="text-[10px] text-slate-600 mb-3">Untuk menyatakan <b>fakta permanen</b> (The earth is round), <b>kebiasaan</b> (I drink coffee every morning), dan <b>instruksi</b>.</p>
+
+                        <p class="text-xs font-bold text-slate-800">⚙️ To-Be & Subjek:</p>
+                        <ul class="text-[10px] text-slate-600 mb-4 list-disc ml-5">
+                            <li><span class="tobe-tag">AM</span> -> I</li>
+                            <li><span class="tobe-tag">IS</span> -> He, She, It (Singular)</li>
+                            <li><span class="tobe-tag">ARE</span> -> You, We, They (Plural)</li>
+                        </ul>
+
+                        <p class="text-xs font-bold text-slate-800">📝 Rumus & Contoh:</p>
+                        <div class="formula-box">
+                            <b>Verbal (Aksi):</b> S + V1 (s/es)<br>
+                            (+) Gledis <u>eats</u> a banana.<br>
+                            (-) Gledis <u>does not eat</u> a banana.<br>
+                            (?) <u>Does</u> Gledis <u>eat</u> a banana?<br><br>
+                            <b>Nominal (Keadaan):</b> S + To Be + Adj/Noun<br>
+                            (+) She <u>is</u> a smart student.<br>
+                            (-) She <u>is not</u> a student.<br>
+                            (?) <u>Is</u> she a student?
+                        </div>
+                    </div>
+
+                    <div class="tenses-box shadow-sm border-l-8 border-l-blue-500">
+                        <h4 class="font-bold text-blue-600 text-lg mb-2 underline">2. Simple Past Tense</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed italic mb-4">"The Completed Action History"</p>
+                        
+                        <p class="text-xs font-bold text-slate-800">🎯 Kegunaan Utama:</p>
+                        <p class="text-[10px] text-slate-600 mb-3">Menceritakan kejadian yang **sudah selesai di masa lampau**. Titik waktunya jelas (yesterday, last year).</p>
+
+                        <p class="text-xs font-bold text-slate-800">⚙️ To-Be (Was/Were):</p>
+                        <ul class="text-[10px] text-slate-600 mb-4 list-disc ml-5">
+                            <li><span class="tobe-tag" style="background:#3b82f6">WAS</span> -> I, He, She, It</li>
+                            <li><span class="tobe-tag" style="background:#3b82f6">WERE</span> -> You, We, They</li>
+                        </ul>
+
+                        <p class="text-xs font-bold text-slate-800">📝 Rumus & Contoh:</p>
+                        <div class="formula-box" style="border-left-color:#3b82f6">
+                            <b>Verbal:</b> S + V2<br>
+                            (+) I <u>bought</u> a laptop yesterday.<br>
+                            (-) I <u>did not buy</u> a laptop.<br>
+                            (?) <u>Did</u> you <u>buy</u> a laptop?<br><br>
+                            <b>Nominal:</b> S + Was/Were + Adj<br>
+                            (+) They <u>were</u> happy last night.<br>
+                            (-) They <u>were not</u> happy.
+                        </div>
+                    </div>
+
+                    <div class="tenses-box shadow-sm border-l-8 border-l-green-500">
+                        <h4 class="font-bold text-green-600 text-lg mb-2 underline">3. Present Continuous</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed italic mb-4">"The Right-Now Action"</p>
+                        
+                        <p class="text-xs font-bold text-slate-800">🎯 Kegunaan Utama:</p>
+                        <p class="text-[10px] text-slate-600 mb-3">Aksi yang **sedang berlangsung sekarang** atau rencana masa depan yang sudah pasti.</p>
+
+                        <p class="text-xs font-bold text-slate-800">⚙️ To-Be:</p>
+                        <p class="text-[10px] text-slate-600 mb-4">Wajib menggunakan **Am/Is/Are** + **V-ing**.</p>
+
+                        <p class="text-xs font-bold text-slate-800">📝 Rumus & Contoh:</p>
+                        <div class="formula-box" style="border-left-color:#22c55e">
+                            <b>Rumus:</b> S + Am/Is/Are + V-ing<br>
+                            (+) We <u>are learning</u> English now.<br>
+                            (-) We <u>are not learning</u> English.<br>
+                            (?) <u>Are</u> you <u>learning</u> English?
+                        </div>
+                    </div>
+
+                    <div class="tenses-box shadow-sm border-l-8 border-l-orange-500">
+                        <h4 class="font-bold text-orange-600 text-lg mb-2 underline">4. Present Perfect Tense</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed italic mb-4">"The Experience & Connection Tense"</p>
+                        
+                        <p class="text-xs font-bold text-slate-800">🎯 Kegunaan Utama:</p>
+                        <p class="text-[10px] text-slate-600 mb-3">Menyatakan kejadian yang **sudah terjadi** tapi efeknya masih terasa, atau pengalaman seumur hidup tanpa menyebutkan waktu pasti.</p>
+
+                        <p class="text-xs font-bold text-slate-800">⚙️ Auxiliary & To-Be:</p>
+                        <ul class="text-[10px] text-slate-600 mb-4 list-disc ml-5">
+                            <li><span class="tobe-tag" style="background:#f97316">HAS</span> -> He, She, It</li>
+                            <li><span class="tobe-tag" style="background:#f97316">HAVE</span> -> I, You, We, They</li>
+                            <li><span class="tobe-tag" style="background:#f97316">BEEN</span> -> Digunakan di kalimat nominal (S + have/has + been + Adj)</li>
+                        </ul>
+
+                        <p class="text-xs font-bold text-slate-800">📝 Rumus & Contoh:</p>
+                        <div class="formula-box" style="border-left-color:#f97316">
+                            <b>Rumus:</b> S + Have/Has + V3<br>
+                            (+) I <u>have visited</u> Paris twice.<br>
+                            (-) She <u>has not finished</u> her work.<br>
+                            (?) <u>Have</u> you <u>ever been</u> to Bali?
+                        </div>
+                    </div>
+
+                    <div class="tenses-box shadow-sm border-l-8 border-l-purple-500">
+                        <h4 class="font-bold text-purple-600 text-lg mb-2 underline">5. Simple Future Tense</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed italic mb-4">"The Prediction & Promise Tense"</p>
+                        
+                        <p class="text-xs font-bold text-slate-800">🎯 Kegunaan Utama:</p>
+                        <p class="text-[10px] text-slate-600 mb-3">Untuk rencana spontan, prediksi masa depan, atau janji.</p>
+
+                        <p class="text-xs font-bold text-slate-800">⚙️ To-Be:</p>
+                        <p class="text-[10px] text-slate-600 mb-4">Gunakan **Be** setelah **Will** jika tidak ada kata kerja (Nominal).</p>
+
+                        <p class="text-xs font-bold text-slate-800">📝 Rumus & Contoh:</p>
+                        <div class="formula-box" style="border-left-color:#a855f7">
+                            <b>Verbal:</b> S + Will + V1<br>
+                            (+) I <u>will call</u> you later.<br>
+                            (-) I <u>will not call</u> you.<br>
+                            (?) <u>Will</u> you <u>call</u> me?<br><br>
+                            <b>Nominal:</b> S + Will + Be + Adj<br>
+                            (+) It <u>will be</u> amazing!<br>
+                            (-) You <u>will not be</u> alone.
+                        </div>
+                    </div>
+                </div>
+                <p class='text-center text-[10px] text-slate-300 mt-10 uppercase tracking-widest'>— Gledis AI Learning System —</p>
+            `;
+        }
+    </script>
 </body>
 </html>
