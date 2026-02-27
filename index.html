@@ -219,82 +219,87 @@
             `;
         }
     </script>
-            <div class="max-w-md mx-auto px-4 mt-8 pb-32">
-        <div class="bg-white rounded-[32px] p-6 shadow-sm border border-pink-100">
-            <h2 class="text-xl font-bold text-pink-600 mb-6 flex items-center gap-2">
-                📖 Let's Practice speaking!
-            </h2>
-            
-            <div class="space-y-8">
-                <div class="p-5 bg-pink-50 rounded-3xl border border-pink-100 relative">
-                    <span class="absolute top-0 right-0 bg-pink-200 text-pink-700 text-[8px] font-bold px-3 py-1 rounded-bl-xl">NEW FRIENDS</span>
-                    <p class="text-[10px] font-bold text-pink-500 uppercase mb-3">🏫 First Day at School</p>
-                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
-                        <p><strong>Gledis:</strong> "Hi! I'm a new student here. Is this seat taken? I'm Gledis, by the way."</p>
-                        <p><strong>Rany:</strong> "Oh, hi! No, it's empty. I'm a new student too! My name is Rany. Nice to meet you, Gledis."</p>
-                        <p><strong>Gledis:</strong> "Nice to meet you too, Rany! What do you like to do in your free time?"</p>
-                        <p><strong>Rany:</strong> "I love singing! It's my biggest hobby. How about you?"</p>
-                        <p><strong>Gledis:</strong> "That's cool! I love watching movies and playing guitar. Wow, your voice must be beautiful! Can you sing a little bit for me?"</p>
-                        <p><strong>Rany:</strong> "Haha, okay! Just a little bit... *singing* 'I'm feeling twenty-twooo...'"</p>
-                        <p><strong>Gledis:</strong> "Wow! Your voice is amazing! I love Taylor Swift too. We should meet at a cafe this weekend to talk more about music!"</p>
-                        <p><strong>Rany:</strong> "I'd love to! See you there!"</p>
-                    </div>
-                    <button onclick="speak('Hi! I am a new student here. Is this seat taken? I am Gledis, by the way. Oh, hi! No, it is empty. I am a new student too! My name is Rany. Nice to meet you, Gledis. Nice to meet you too, Rany! What do you like to do in your free time? I love singing! It is my biggest hobby. How about you? That is cool! I love watching movies and playing guitar. Wow, your voice must be beautiful! Can you sing a little bit for me? Haha, okay! Just a little bit... I am feeling twenty-twooo... Wow! Your voice is amazing! I love Taylor Swift too. We should meet at a cafe this weekend to talk more about music! I would love to! See you there!')" 
-                            class="mt-4 w-full py-3 bg-white text-pink-600 rounded-2xl shadow-sm font-bold text-xs border border-pink-100">
-                        🔊 PLAY SCHOOL STORY
-                    </button>
+                    <div class="space-y-10">
+            <div class="p-6 bg-gradient-to-b from-pink-50 to-white rounded-[32px] border border-pink-100 shadow-sm">
+                <p class="text-[10px] font-black text-pink-400 uppercase tracking-[0.2em] mb-4 text-center">Scene 1: New Classmates</p>
+                <div class="space-y-4 text-sm text-slate-700 leading-relaxed italic">
+                    <p><strong>Gledis:</strong> "Hi! Umm, excuse me... I'm a new student here. Is anyone sitting here? I'm Gledis!"</p>
+                    <p><strong>Rany:</strong> "Oh, hey! No, it's free. Come sit here! I'm a new student too. My name is Rany. Nice to meet you, Gledis!"</p>
+                    <p><strong>Gledis:</strong> "Phew, thank God! I was so nervous. Anyway, what do you like to do for fun? Do you have a hobby?"</p>
+                    <p><strong>Rany:</strong> "I really love singing. It’s my life! How about you, Gledis?"</p>
+                    <p><strong>Gledis:</strong> "I love watching movies and I play guitar! Wait... you love singing? Your voice must be so dreamy! Can you please sing a little bit for me? Just a tiny bit!"</p>
+                    <p><strong>Rany:</strong> "Haha, you're so sweet! Okay, since we both love music... let's see... *singing softly*... I don't know about you... but I'm feeling twenty-twooo... Everything will be alright, if... you keep me next to you..."</p>
+                    <p><strong>Gledis:</strong> "Oh my... your voice is so soft! It's like Taylor Swift! I'm a huge fan too. We MUST go to a cafe and talk more about this!"</p>
+                    <p><strong>Rany:</strong> "I'd love that! Let's go this weekend!"</p>
                 </div>
+                <button onclick="playDrama('school')" class="mt-6 w-full py-4 bg-pink-500 text-white rounded-2xl shadow-lg font-bold hover:bg-pink-600 transition-all flex items-center justify-center gap-2">
+                    🌸 Play School Story
+                </button>
+            </div>
 
-                <div class="p-5 bg-green-50 rounded-3xl border border-green-100 relative">
-                    <span class="absolute top-0 right-0 bg-green-200 text-green-700 text-[8px] font-bold px-3 py-1 rounded-bl-xl">CAFE DATE</span>
-                    <p class="text-[10px] font-bold text-green-600 uppercase mb-3">🍵 Matcha & Music</p>
-                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
-                        <p><strong>Rany:</strong> "Hi Gledis! You're already here!"</p>
-                        <p><strong>Gledis:</strong> "Hi Rany! Yes, let's order first. I want a Large Iced Matcha Latte."</p>
-                        <p><strong>Rany:</strong> "Me too! Two Matcha Lattes, please."</p>
-                        <p><strong>Gledis:</strong> "So, Rany... you sing so well. Do you have a dream for the future?"</p>
-                        <p><strong>Rany:</strong> "Actually, yes. My dream is to become a famous singer one day."</p>
-                        <p><strong>Gledis:</strong> "I believe in you! With your voice, you will definitely be a star."</p>
-                    </div>
-                    <button onclick="speak('Hi Gledis! You are already here! Hi Rany! Yes, let us order first. I want a Large Iced Matcha Latte. Me too! Two Matcha Lattes, please. So, Rany... you sing so well. Do you have a dream for the future? Actually, yes. My dream is to become a famous singer one day. I believe in you! With your voice, you will definitely be a star.')" 
-                            class="mt-4 w-full py-3 bg-white text-green-600 rounded-2xl shadow-sm font-bold text-xs border border-green-100">
-                        🔊 PLAY CAFE STORY
-                    </button>
+            <div class="p-6 bg-gradient-to-b from-green-50 to-white rounded-[32px] border border-green-100 shadow-sm">
+                <p class="text-[10px] font-black text-green-500 uppercase tracking-[0.2em] mb-4 text-center">Scene 2: Matcha & Dreams</p>
+                <div class="space-y-4 text-sm text-slate-700 leading-relaxed italic">
+                    <p><strong>Rany:</strong> "Hi Gledis! Over here! Sorry if I kept you waiting."</p>
+                    <p><strong>Gledis:</strong> "No worries, Rany! I just ordered for us. Two Large Iced Matcha Lattes with less sugar. I know you'd love it!"</p>
+                    <p><strong>Rany:</strong> "Aww, thank you! You're the best. Matcha is literally my favorite drink ever."</p>
+                    <p><strong>Gledis:</strong> "So, Rany... I’ve been thinking about your voice. Do you want to be a professional singer?"</p>
+                    <p><strong>Rany:</strong> "Yeah... that's my biggest dream. I want to stand on a big stage, singing my own songs, and making people happy."</p>
+                    <p><strong>Gledis:</strong> "I believe in you! One day, you'll be a superstar, and I'll be there in the front row, cheering for you!"</p>
+                    <p><strong>Rany:</strong> "That means so much to me, Gledis. Thank you for being such a great friend."</p>
                 </div>
+                <button onclick="playDrama('cafe')" class="mt-6 w-full py-4 bg-green-600 text-white rounded-2xl shadow-lg font-bold hover:bg-green-700 transition-all flex items-center justify-center gap-2">
+                    🍵 Play Cafe Story
+                </button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        let synth = window.speechSynthesis;
-        let utterance;
+<script>
+    let synth = window.speechSynthesis;
 
-        function speak(text) {
-            synth.cancel(); // Reset suara
-            utterance = new SpeechSynthesisUtterance(text);
-            
-            utterance.lang = 'en-US';
-            utterance.rate = 0.75; // SANGAT LAMBAT (Supaya jelas)
-            utterance.pitch = 1.5; // NADA TINGGI (Supaya suara gadis remaja)
-            
-            // Mencoba mencari suara 'Samantha' atau 'Google US' yang lebih lembut
-            let voices = synth.getVoices();
-            let softVoice = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google US English') || v.name.includes('Female'));
-            if (softVoice) utterance.voice = softVoice;
-
-            synth.speak(utterance);
+    function playDrama(scene) {
+        synth.cancel();
+        
+        let text = "";
+        if(scene === 'school') {
+            text = "Gledis: Hi! Umm, excuse me... I am a new student here. Is anyone sitting here? I am Gledis! | Rany: Oh, hey! No, it is free. Come sit here! I am a new student too. My name is Rany. Nice to meet you, Gledis! | Gledis: Phew, thank God! I was so nervous. Anyway, what do you like to do for fun? Do you have a hobby? | Rany: I really love singing. It is my life! How about you, Gledis? | Gledis: That is cool! I love watching movies and I play guitar! Wait... you love singing? Your voice must be so dreamy! Can you please sing a little bit for me? Just a tiny bit! | Rany: Haha, you are so sweet! Okay, since we both love music... let's see... I dont know about you... but, I am feeling, twenty-twooo... Everything will be alright, if,,, you keep me, next to you... | Gledis: Oh my... your voice is so soft! It is like Taylor Swift! I am a huge fan too. We MUST go to a cafe and talk more about this! | Rany: I would love that! Let us go this weekend!";
+        } else {
+            text = "Rany: Hi Gledis! Over here! Sorry if I kept you waiting. | Gledis: No worries, Rany! I just arrived too. Let us order first. I really want a Large Iced Matcha Latte. I love Matcha so much! | Rany: Aww, thank you! You are the best. Matcha is literally my favorite drink ever. | Gledis: So, Rany... I have been thinking about your voice. Do you want to be a professional singer? | Rany: Yeah... that is my biggest dream. I want to stand on a big stage, singing my own songs, and making people happy. | Gledis: I believe in you! One day, you will be a superstar, and I will be there in the front row, cheering for you! | Rany: That means so much to me, Gledis. Thank you for being such a great friend.";
         }
 
-        function pauseAudio() { synth.pause(); }
-        function resumeAudio() { synth.resume(); }
-        function stopAudio() { synth.cancel(); }
-    </script>
+        let parts = text.split('|');
+        
+        parts.forEach((part) => {
+            let utterance = new SpeechSynthesisUtterance(part.split(':')[1]);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.75; 
 
-    <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
-        <button onclick="pauseAudio()" class="w-12 h-12 bg-yellow-400 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-all"><i class="fas fa-pause"></i></button>
-        <button onclick="resumeAudio()" class="w-12 h-12 bg-pink-400 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-all"><i class="fas fa-play ml-1"></i></button>
-        <button onclick="stopAudio()" class="w-12 h-12 bg-slate-400 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-all"><i class="fas fa-stop text-xs"></i></button>
-    </div>
+            if (part.includes("Gledis:")) {
+                utterance.pitch = 1.5; 
+            } else {
+                utterance.pitch = 0.9; 
+            }
+
+            let voices = synth.getVoices();
+            let bestVoice = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google US English'));
+            if (bestVoice) utterance.voice = bestVoice;
+
+            synth.speak(utterance);
+        });
+    }
+
+    function pauseAudio() { synth.pause(); }
+    function resumeAudio() { synth.resume(); }
+    function stopAudio() { synth.cancel(); }
+</script>
+
+<div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+    <button onclick="pauseAudio()" class="w-12 h-12 bg-yellow-400 text-white rounded-full shadow-lg flex items-center justify-center"><i class="fas fa-pause"></i></button>
+    <button onclick="resumeAudio()" class="w-12 h-12 bg-pink-400 text-white rounded-full shadow-lg flex items-center justify-center"><i class="fas fa-play ml-1"></i></button>
+    <button onclick="stopAudio()" class="w-12 h-12 bg-slate-400 text-white rounded-full shadow-lg flex items-center justify-center"><i class="fas fa-stop text-xs"></i></button>
+</div>
 
 </body>
 </html>
