@@ -6,88 +6,15 @@
     <title>Tutor Gledis ✨</title>
     <style>
         :root { --p: #ff85a2; --s: #fff0f3; --d: #ff4d7d; }
-        body { background: var(--s); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
-        header { background: white; padding: 15px; text-align: center; border-bottom: 2px solid var(--p); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        h2 { margin: 0; color: var(--p); font-size: 20px; }
-        
-        /* Kotak Kunci */
-        #setup { background: white; margin: 15px; padding: 15px; border-radius: 15px; border: 1px dashed var(--p); text-align: center; }
-        input { border: 1px solid var(--p); padding: 8px; border-radius: 8px; width: 80%; margin-bottom: 10px; font-size: 12px; }
-        
+        body { background: var(--s); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        header { background: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; box-shadow: 0 4px 15px rgba(255,133,162,0.1); }
+        h2 { margin: 0; color: var(--p); font-size: 24px; letter-spacing: 1px; }
         #chat { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-        .b { padding: 12px 16px; border-radius: 18px; max-width: 80%; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .ai { background: white; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .b { padding: 14px 18px; border-radius: 20px; max-width: 80%; font-size: 15px; line-height: 1.5; animation: pop 0.3s ease; }
+        @keyframes pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .ai { background: white; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); color: #444; }
         .u { background: var(--p); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-        
-        .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 20px; background: white; border-radius: 25px 25px 0 0; }
-        button { background: var(--s); border: 1px solid #ffe0e9; padding: 12px; border-radius: 12px; color: var(--d); font-weight: bold; cursor: pointer; }
-        .spk { background: var(--d); color: white; margin-top: 10px; padding: 8px; width: 100%; border-radius: 8px; border: none; font-size: 11px; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-<header><h2>✨ Tutor Gledis ✨</h2></header>
-
-<div id="setup">
-    <p style="font-size: 12px; color: #ff4d7d; margin-top: 0;">Tempel Kunci AIza kamu di sini dulu ya:</p>
-    <input type="password" id="apiKey" placeholder="AIzaSy...">
-    <button onclick="saveKey()" style="padding: 5px 15px;">Aktifkan 🌸</button>
-</div>
-
-<div id="chat"><div class="b ai">Halo Gledis! Kalau kuncinya sudah diaktifkan, pilih menu di bawah ya!</div></div>
-
-<div class="btns">
-    <button onclick="ask('Berikan 3 kosakata Inggris aesthetic')">📖 Kosakata</button>
-    <button onclick="ask('Berikan motivasi belajar')">💖 Motivasi</button>
-</div>
-
-<script>
-    let myKey = "";
-
-    function saveKey() {
-        myKey = document.getElementById('apiKey').value;
-        if(myKey) {
-            document.getElementById('setup').style.display = 'none';
-            alert("Tutor Gledis Siap Beraksi! ✨");
-        } else {
-            alert("Isi kuncinya dulu ya cantik!");
-        }
-    }
-
-    async function ask(q) {
-        if(!myKey) return alert("Masukkan kunci dulu di atas!");
-        
-        const box = document.getElementById('chat');
-        box.innerHTML += `<div class="b u">${q}</div>`;
-        const ld = document.createElement('div');
-        ld.className = 'b ai';
-        ld.innerText = "Tutor Gledis sedang mengetik... ✨";
-        box.appendChild(ld);
-
-        try {
-            const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${myKey}`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({contents: [{parts: [{text: q + " (Jawab sebagai Tutor Gledis yang aesthetic)"}]}]})
-            });
-            const d = await r.json();
-            const t = d.candidates[0].content.parts[0].text;
-            ld.remove();
-            const ai = document.createElement('div');
-            ai.className = 'b ai';
-            ai.innerHTML = t.replace(/\n/g, '<br>') + `<button class="spk" onclick="speak('${t.replace(/['"\n]/g, " ")}')">🔊 DENGARKAN SUARA</button>`;
-            box.appendChild(ai);
-            box.scrollTop = box.scrollHeight;
-        } catch (e) {
-            ld.innerText = "Ups, kuncinya salah atau mati. Coba cek lagi ya! 😅";
-        }
-    }
-
-    function speak(t) {
-        const u = new SpeechSynthesisUtterance(t);
-        u.lang = 'en-US';
-        window.speechSynthesis.speak(u);
-    }
-</script>
-</body>
-</html>
+        .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 20px; background: white; border-radius: 30px 30px 0 0; }
+        button { background: var(--s); border: 1px solid #ffe0e9; padding: 12px; border-radius: 15px; color: var(--d); font-weight: 600; cursor: pointer; transition: 0.2s; }
+        button:active { transform: scale(0.95); background: var(--p); color: white; }
+        .spk {
